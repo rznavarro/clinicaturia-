@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #060097;
+  --color-secondary: #FFCD57;
+  --color-surface: #FFFFFF;
+  --color-ink: #1E293B;
+  --color-muted: #67768E;
+  --color-soft: #F9F6FE;
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background-color: var(--color-surface);
+}
+
+/* Keyframes for Hero animations */
+@keyframes heroWordFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drawSmileLine {
+  0% {
+    stroke-dashoffset: 130;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes heroFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes urgencyPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(1.2);
+  }
+}
+
+.hero-word {
+  display: inline-block;
+  opacity: 0;
+  animation: heroWordFadeUp 450ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-smile-animated {
+  stroke-dasharray: 130;
+  stroke-dashoffset: 130;
+  animation: drawSmileLine 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 920ms;
+}
+
+.hero-fade-element {
+  opacity: 0;
+  animation: heroFadeIn 300ms ease-out forwards;
+  animation-delay: 1520ms;
+}
+
+.urgency-dot-pulse {
+  animation: urgencyPulse 2s ease-in-out infinite;
+}
+
+/* prefers-reduced-motion compliance */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-word,
+  .hero-fade-element {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .hero-smile-animated {
+    stroke-dashoffset: 0 !important;
+    animation: none !important;
+  }
+
+  .urgency-dot-pulse {
+    animation: none !important;
+  }
+}
